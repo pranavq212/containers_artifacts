@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: userprofile
+    app: tripviewer
     env: dev
     owner: team3
     version: v1
