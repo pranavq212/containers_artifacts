@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poi-deployment
+  namespace: openhack
+  labels:
+    deploy: team3hack
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poi
+      deploy: team3hack
+  template:
+    metadata:
+      labels:
+        app: poi
+        deploy: team3hack
+spec:
+  containers:
+    - image: "registryajv1184.azurecr.io/tripinsights/poi:1.0"
+      imagePullPolicy: Always
+      name: poi
+      # livenessProbe:  
+      # httpGet:
+      #   path: /api/poi
+      #   port: 8080
+      # initialDelaySeconds: 10
+      # periodSeconds: 30
+      # readinessProbe:
+      # httpGet:
+      #   path: /api/poi
+      #   port: 8080
+      #   initialDelaySeconds: 5
+      #   periodSeconds: 5
+      ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
+  env:
+    SQL_PASSWORD: eN0id8Nw8
+    SQL_SERVER: sqlserverajv1184
+    SQL_USER: sqladminaJv1184
