@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: trips
+    env: dev
+    owner: team3
+    version: v1
+  name: trips-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trips
+      env: dev
+      owner: team3
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: trips
+        env: dev
+        owner: team3
+        version: v1
+    spec:
+      containers:
+      - image: "registryajv1184.azurecr.io/tripinsights/trips:1.0"
+        imagePullPolicy: Always
+        name: trips
+        env:
+        - name: SQL_SERVER
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: server
+        - name: SQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: username
+        - name: SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: password
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP

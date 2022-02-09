@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: userprofile
+    env: dev
+    owner: team3
+    version: v1
+  name: userprofile-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userprofile
+      env: dev
+      owner: team3
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: userprofile
+        env: dev
+        owner: team3
+        version: v1
+    spec:
+      containers:
+      - image: "registryajv1184.azurecr.io/tripinsights/userprofile:1.0"
+        imagePullPolicy: Always
+        name: userprofile
+        env:
+        - name: SQL_SERVER
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: server
+        - name: SQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: username
+        - name: SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: password
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP

@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: openhackteam3
+  name: po-svc
+  labels:
+    app: poi
+    env: development
+    owner: openhack
+spec:
+  type: ClusterIp
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+
+selector:
+    app: wildfly-dev
+    env: development
+    owner: ymallipe
