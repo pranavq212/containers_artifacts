@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: api
+  name: po-svc
+  labels:
+    app: poi
+    env: development
+    owner: team3
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+  selector:
+    app: poi
+    env: development
+    owner: team3
+---
+#Trips service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: api
+  name: trips-svc
+  labels:
+    app: trips
+    env: development
+    owner: team3
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+  selector:
+    app: trips
+    env: development
+    owner: team3
+---
+#User-Java service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: api
+  name: user-java-svc
+  labels:
+    app: user-java
+    env: development
+    owner: team3
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+  selector:
+    app: user-java
+    env: development
+    owner: team3
+---
+#userprofile service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: api
+  name: userprofile-svc
+  labels:
+    app: userprofile
+    env: development
+    owner: team3
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+  selector:
+    app: userprofile
+    env: development
+    owner: team3
